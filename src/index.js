@@ -2,10 +2,11 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
+import Login from '../src/pages/login';
 
 ReactDOM.render(
   <React.StrictMode>
-    <div><p>hola desde index</p></div>
+    <Login />
   </React.StrictMode>,
   document.getElementById('root')
 );
