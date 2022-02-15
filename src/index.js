@@ -2,11 +2,14 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
-import Login from '../src/pages/login';
+import RouterContainer from '../src/pages/routerContainer';
+import { BrowserRouter } from "react-router-dom";
 
 ReactDOM.render(
   <React.StrictMode>
-    <Login />
+    <BrowserRouter>
+      <RouterContainer />
+    </BrowserRouter>,
   </React.StrictMode>,
   document.getElementById('root')
 );
