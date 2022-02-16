@@ -1,0 +1,33 @@
+
+
+h1{
+    text-align: center;
+}
+
+#outlined-basic{
+    background-color: white;
+    
+    padding-top: 1rem;
+    margin: 5px;
+    border-radius: 10px;
+}
+
+.header{
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    
+}
+.icon{
+    margin-left: 8rem;
+
+}
+
+.box{
+    border-radius: 20px;
+}
+
+.incorrect{
+    text-align: center;
+    color: red;
+}
