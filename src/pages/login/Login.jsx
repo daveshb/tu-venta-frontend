@@ -11,13 +11,10 @@ import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined
 import './styles.scss';
 
 
-
-
 const Login = () => {
   const navigate = useNavigate();
 
-  const [isLogin, setIsLogin] =useState(0);
-
+  const [isLogin, setIsLogin] =useState(false);
   const [message, setMessage] =useState("");
   const [logState, setLogState ]= useState(false);
   const[formState, setFormState]= useState ({
@@ -28,7 +25,7 @@ const Login = () => {
   
    const {name, password}=formState;
 
-  const handleImputChange = ({target}) =>{
+   const handleImputChange = ({target}) =>{
 
     setFormState({
       ...formState,
@@ -36,12 +33,10 @@ const Login = () => {
     });
   }
 
-  useEffect(()=>{
+    useEffect(()=>{
     if(name=="david" && password=="1234"){
-      setIsLogin(1);
-      localStorage.setItem("isLogin", isLogin);
-      navigate("/home")
-      
+      setIsLogin(true)
+            
     }else if(logState){
 
       console.log("No es posible loguear")
@@ -57,42 +52,57 @@ const Login = () => {
   useEffect(()=>{
     if((logState) && (name=="" || password=="")){
       setMessage("Todos los campos son obligatorios")
+      
     }
   },[logState]);
+
+  useEffect(()=>{
+    if (isLogin){
+      localStorage.setItem("isLogin", isLogin)
+      navigate("/home") 
+      console.log(isLogin)
+    }
+  },[isLogin]);
+
 
   //Local Storage
   // Obtener desde local storage: 
    //localStorage.getItem("isLogin");
 
 
-  
   return(
     <>
+    <div className='myBody' >
       {/* <CssBaseline  / > */}
       
       <Container maxWidth="sm">
        <div className='header'>
         <AccountCircleOutlinedIcon className='icon' fontSize="large" />
-        <h1>Iniciar sesión</h1>
+        <h1 className='head'>Iniciar sesión</h1>
       </div>
       
         
-        <Box className='box' sx={{ bgcolor: '#DFDBE2', height: '40vh' }} >
+        <Box className='box' sx={{ bgcolor: '#DFDBE2', height: '50vh' }} >
           <Stack spacing={3}>
            <TextField 
+
+            error={name === ""}
             id="outlined-basic" 
             name="name"
-            label="Nombre de usuario" 
+            label="Usuario" 
             variant="outlined" 
             type="text"
             placeholder="User"
             value={name}
             onChange={handleImputChange}
             autoComplete="off"
-            
+            helperText={name === "" ? 'Ingrese su Usuario!' : ' '}
+          
             />
 
            <TextField 
+            
+            error={password === ""}
             id="outlined-basic" 
             name='password'
             label="Contraseña" 
@@ -102,6 +112,7 @@ const Login = () => {
             value={password}
             onChange={handleImputChange}
             autoComplete="off"
+            helperText={password === "" ? 'Ingrese su constraseña!' : ' '}
             
             />
            <Button 
@@ -117,7 +128,8 @@ const Login = () => {
         </Stack>
         </Box>
 
-      </Container>  
+      </Container> 
+      </div> 
     </>
   )
 }
