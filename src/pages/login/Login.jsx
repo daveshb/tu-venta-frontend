@@ -11,8 +11,12 @@ import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined
 import './styles.scss';
 
 
+
+
 const Login = () => {
   const navigate = useNavigate();
+
+  const [isLogin, setIsLogin] =useState(0);
 
   const [message, setMessage] =useState("");
   const [logState, setLogState ]= useState(false);
@@ -21,7 +25,7 @@ const Login = () => {
     password: '',
     
   });
-
+  
    const {name, password}=formState;
 
   const handleImputChange = ({target}) =>{
@@ -34,7 +38,10 @@ const Login = () => {
 
   useEffect(()=>{
     if(name=="david" && password=="1234"){
+      setIsLogin(1);
+      localStorage.setItem("isLogin", isLogin);
       navigate("/home")
+      
     }else if(logState){
 
       console.log("No es posible loguear")
@@ -45,12 +52,19 @@ const Login = () => {
       }, 2000);
     }
   },  [logState]);
+  
 
   useEffect(()=>{
     if((logState) && (name=="" || password=="")){
       setMessage("Todos los campos son obligatorios")
     }
-  },[logState])
+  },[logState]);
+
+  //Local Storage
+  // Obtener desde local storage: 
+   //localStorage.getItem("isLogin");
+
+
   
   return(
     <>
