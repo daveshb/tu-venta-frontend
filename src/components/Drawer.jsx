@@ -46,32 +46,13 @@ const DrawerHeader = styled('div')(({ theme }) => ({
   justifyContent: 'flex-end',
 }));
 
-export default function PersistentDrawerLeft() {
+const PersistentDrawerLeft = ({open, setOpen}) => {
   const navigatee = useNavigate();
   const theme = useTheme();
-  const [open, setOpen] = React.useState(false);
-
-  const handleDrawerOpen = () => {
-    setOpen(true);
-  };
-
-  const handleDrawerClose = () => {
-    setOpen(false);
-  };
 
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
-        <Toolbar>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            onClick={handleDrawerOpen}
-            edge="start"
-          >
-            <MenuIcon />
-          </IconButton>
-        </Toolbar>
       <Drawer
         sx={{
           width: drawerWidth,
@@ -86,7 +67,7 @@ export default function PersistentDrawerLeft() {
         open={open}
       >
         <DrawerHeader>
-          <IconButton onClick={handleDrawerClose}>
+          <IconButton onClick={()=>setOpen(false)}>
             {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
           </IconButton>
         </DrawerHeader>
@@ -116,3 +97,4 @@ export default function PersistentDrawerLeft() {
   );
 }
 
+export default PersistentDrawerLeft;
