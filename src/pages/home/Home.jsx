@@ -9,10 +9,12 @@ import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import { useNavigate } from "react-router-dom";
+import { PersistentDrawerLeft } from '../../components';
 
 const Home = () => {
   const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = useState(null);
+  const [open, setOpen] = useState(false);
 
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);
@@ -31,7 +33,6 @@ const Home = () => {
     }
   }, [])
 
-
   return(
    <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
@@ -42,6 +43,7 @@ const Home = () => {
             color="inherit"
             aria-label="menu"
             sx={{ mr: 3 }}
+            onClick={()=>setOpen(!open)}
           >
             <MenuIcon />
           </IconButton>
@@ -79,10 +81,10 @@ const Home = () => {
             </div>
         </Toolbar>
       </AppBar>
+      <PersistentDrawerLeft open={open} setOpen={setOpen} />
     </Box>
   )
 };
-
 
 export default Home;
 
