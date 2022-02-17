@@ -19,9 +19,6 @@ import { useNavigate } from "react-router-dom";
 
 const drawerWidth = 240;
 
-
- 
-
 const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
   ({ theme, open, }) => ({
     flexGrow: 1,
@@ -50,7 +47,7 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 }));
 
 export default function PersistentDrawerLeft() {
-    const navigatee = useNavigate();
+  const navigatee = useNavigate();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
 
@@ -87,7 +84,6 @@ export default function PersistentDrawerLeft() {
         variant="persistent"
         anchor="left"
         open={open}
-        
       >
         <DrawerHeader>
           <IconButton onClick={handleDrawerClose}>
@@ -96,23 +92,21 @@ export default function PersistentDrawerLeft() {
         </DrawerHeader>
         <Divider />
         <List>
-                     <ListItem button onClick={()=>navigatee("/facturacion")}>
-                         <ListItemIcon>
-                         <CurrencyExchangeIcon/>
-                         <ListItemText primary="Facturación"/>
-                         </ListItemIcon>
-                        
-                     </ListItem>
-                 </List>
-                 <List>
-                     <ListItem button onClick={()=>navigatee("/reportes")}>
-                         <ListItemIcon>
-                         <DriveFileRenameOutlineIcon />
-                         <ListItemText primary="Reportes"/>
-                         </ListItemIcon>
-                         
-                     </ListItem>
-                 </List>
+          <ListItem button onClick={()=>navigatee("/facturacion")}>
+              <ListItemIcon>
+              <CurrencyExchangeIcon/>
+              <ListItemText primary="Facturación"/>
+              </ListItemIcon>
+          </ListItem>
+        </List>
+        <List>
+          <ListItem button onClick={()=>navigatee("/reportes")}>
+            <ListItemIcon>
+            <DriveFileRenameOutlineIcon />
+            <ListItemText primary="Reportes"/>
+            </ListItemIcon>
+          </ListItem>
+        </List>
         <Divider />
       </Drawer>
       <Main open={open}>
