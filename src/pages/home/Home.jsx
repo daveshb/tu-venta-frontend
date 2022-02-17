@@ -1,6 +1,6 @@
 
-
-import * as React from 'react';
+import React, { useEffect, useState } from 'react';
+// import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -13,17 +13,18 @@ import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
 import AccountCircle from '@mui/icons-material/AccountCircle';
-import { Navigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
 
 
 const Home = () => {
 
+  const navigate = useNavigate();
 
+  const [auth, setAuth] = useState(true);
+  const [anchorEl, setAnchorEl] = useState(null);
+  const [isLogin, setIsLogin] = useState(true);
 
-  const [auth, setAuth] = React.useState(true);
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const [isLogin, setIsLogin] =React.useState();
 
   const handleChange = (event) => {
     setAuth(event.target.checked);
@@ -33,29 +34,15 @@ const Home = () => {
     setAnchorEl(event.currentTarget);
   };
 
-  
 
-
-
-
-
-  const handleClose = () => {
-    setAnchorEl(null);
-    setIsLogin(false)
-       
-
-  };
-
-
-  React.useEffect(()=>{
+  useEffect(()=>{
     if (!isLogin){
+      setAnchorEl(null);
       localStorage.setItem("isLogin", isLogin)
-      // navigate("/") 
-      console.log(isLogin)
+      navigate("/")
+      
     }
   },[isLogin]);
-
-
 
 
   return(
@@ -102,9 +89,12 @@ const Home = () => {
                   horizontal: 'right',
                 }}
                 open={Boolean(anchorEl)}
-                onClose={handleClose}
+                onClose={()=>setIsLogin(false)}
               >
-                <MenuItem onClick={handleClose}>Cerrar Sesión</MenuItem>
+                <MenuItem onClick={()=>{
+                  setIsLogin(false)
+                  
+                }}>Cerrar Sesión</MenuItem>
                 
               </Menu>
             </div>
