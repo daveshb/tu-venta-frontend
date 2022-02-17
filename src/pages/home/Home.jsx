@@ -13,13 +13,17 @@ import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
 import AccountCircle from '@mui/icons-material/AccountCircle';
+import { Navigate } from 'react-router-dom';
 
 
 
 const Home = () => {
 
+
+
   const [auth, setAuth] = React.useState(true);
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const [isLogin, setIsLogin] =React.useState();
 
   const handleChange = (event) => {
     setAuth(event.target.checked);
@@ -29,11 +33,30 @@ const Home = () => {
     setAnchorEl(event.currentTarget);
   };
 
+  
+
+
+
+
+
   const handleClose = () => {
     setAnchorEl(null);
-    
+    setIsLogin(false)
+       
 
   };
+
+
+  React.useEffect(()=>{
+    if (!isLogin){
+      localStorage.setItem("isLogin", isLogin)
+      // navigate("/") 
+      console.log(isLogin)
+    }
+  },[isLogin]);
+
+
+
 
   return(
     <>
