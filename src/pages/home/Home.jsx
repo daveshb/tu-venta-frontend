@@ -1,54 +1,39 @@
-
 import React, { useEffect, useState } from 'react';
-// import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
-// import Switch from '@mui/material/Switch';
-// import FormControlLabel from '@mui/material/FormControlLabel';
-// import FormGroup from '@mui/material/FormGroup';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import { useNavigate } from "react-router-dom";
 
-
-
 const Home = () => {
-
   const navigate = useNavigate();
-
-  const [auth, setAuth] = useState(true);
   const [anchorEl, setAnchorEl] = useState(null);
-  const [isLogin, setIsLogin] = useState(true);
-
-
-  const handleChange = (event) => {
-    setAuth(event.target.checked);
-  };
 
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);
   };
 
+  const handleLoguot = () => {
+    localStorage.setItem("isLogin", false);
+    navigate("/");
+  }
 
   useEffect(()=>{
-    if (!isLogin){
-      setAnchorEl(null);
-      localStorage.setItem("isLogin", isLogin)
+    setAnchorEl(null);
+    let isLogin = localStorage.getItem("isLogin");
+    if(isLogin !== null && isLogin == "false"){
       navigate("/")
-      
     }
-  },[isLogin]);
+  }, [])
 
 
   return(
-    <>
    <Box sx={{ flexGrow: 1 }}>
-      
       <AppBar position="static">
         <Toolbar>
           <IconButton
@@ -60,11 +45,9 @@ const Home = () => {
           >
             <MenuIcon />
           </IconButton>
-
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             Tu Venta
           </Typography>
-          {auth && (
             <div>
               <IconButton
                 size="large"
@@ -89,22 +72,14 @@ const Home = () => {
                   horizontal: 'right',
                 }}
                 open={Boolean(anchorEl)}
-                onClose={()=>setIsLogin(false)}
+                onClose={()=>handleLoguot()}
               >
-                <MenuItem onClick={()=>{
-                  setIsLogin(false)
-                  
-                }}>Cerrar Sesión</MenuItem>
-                
+                <MenuItem onClick={()=>{handleLoguot()}}>Cerrar Sesión</MenuItem>
               </Menu>
             </div>
-          )}
         </Toolbar>
       </AppBar>
     </Box>
-
-
-    </>
   )
 };
 
