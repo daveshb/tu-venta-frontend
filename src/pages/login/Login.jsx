@@ -38,7 +38,7 @@ const Login = () => {
       return;
     }
 
-    if(name === "david" && password === "1234"){
+    if(name === "user" && password === "1234"){
       setIsLogin(true);
     }else{
       setMessage("Usuario o contraseña incorrecto")
@@ -100,6 +100,8 @@ const Login = () => {
               {message}
             </Alert>
           </Stack>
+
+          <h4 className='footer_login'>© 2022 by JLD Todos los derechos reservados </h4>
           </Box>
         </form>
        </Container> 
