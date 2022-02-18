@@ -25,6 +25,10 @@ const Home = () => {
     navigate("/");
   }
 
+  const handleClose =() =>{
+    setAnchorEl(null);
+  };
+
   useEffect(()=>{
     setAnchorEl(null);
     let isLogin = localStorage.getItem("isLogin");
@@ -74,7 +78,7 @@ const Home = () => {
                   horizontal: 'right',
                 }}
                 open={Boolean(anchorEl)}
-                onClose={()=>handleLoguot()}
+                onClose={()=>handleClose()}
               >
                 <MenuItem onClick={()=>{handleLoguot()}}>Cerrar Sesión</MenuItem>
               </Menu>
