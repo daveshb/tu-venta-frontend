@@ -45,7 +45,7 @@ const Login = () => {
       setAlert("error");
       setTimeout(() => {
           setMessage("")
-      }, 4000);
+      }, 2000);
     }
   }
 

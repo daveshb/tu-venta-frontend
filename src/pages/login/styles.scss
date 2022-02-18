@@ -22,19 +22,17 @@
 
 .header {
   text-align: center;
+  align-items: center;
+  justify-content: center;
   display: flex;
   flex-direction: row;
-  margin-top: 8px;
-}
-.icon {
-  margin-left: 8rem;
+  padding-top: 20px;
 }
 
 .box {
   border-radius: 20px;
   margin-top: 3rem;
 }
-
 
 .footer_login{
   text-align: center;
