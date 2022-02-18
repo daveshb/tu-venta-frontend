@@ -6,11 +6,13 @@ import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Stack from '@mui/material/Stack';
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
+import Alert from '@mui/material/Alert';
 import './styles.scss';
 
 
 const Login = () => {
   const navigate = useNavigate();
+  const [alert, setAlert] =useState("success");
   const [isLogin, setIsLogin] =useState(false);
   const [message, setMessage] =useState("");
   const [logState, setLogState ]= useState(false);
@@ -31,6 +33,7 @@ const Login = () => {
   const handleClick = () => {
     if(name === "" || password === ""){
       setMessage("Todos los campos son obligatorios")
+      setAlert("error");
       setLogState(true);
       return;
     }
@@ -39,9 +42,10 @@ const Login = () => {
       setIsLogin(true);
     }else{
       setMessage("Usuario o contraseña incorrecto")
+      setAlert("error");
       setTimeout(() => {
           setMessage("")
-      }, 2000);
+      }, 4000);
     }
   }
 
@@ -91,7 +95,10 @@ const Login = () => {
             helperText={logState && password === "" ? 'Ingrese su constraseña!' : ' '}
             />
            <Button type='submit' onClick={handleClick}variant="contained">Ingresar</Button>
-            <h2 className='incorrect'>{message}</h2>
+             <Alert 
+              severity= {alert} >
+              {message}
+            </Alert>
           </Stack>
           </Box>
         </form>
