@@ -60,6 +60,7 @@ const Login = () => {
         <AccountCircleOutlinedIcon className='icon' fontSize="large" />
         <h1 className='head'>Iniciar sesión</h1>
       </div>
+      <form>
         <Box className='box' sx={{ bgcolor: '#DFDBE2', height: '50vh' }} >
           <Stack spacing={3}>
            <TextField 
@@ -89,11 +90,12 @@ const Login = () => {
             autoComplete="off"
             helperText={logState && password === "" ? 'Ingrese su constraseña!' : ' '}
             />
-           <Button onClick={handleClick}variant="contained">Ingresar</Button>
+           <Button type='submit' onClick={handleClick}variant="contained">Ingresar</Button>
             <h2 className='incorrect'>{message}</h2>
-        </Stack>
-        </Box>
-      </Container> 
+          </Stack>
+          </Box>
+        </form>
+       </Container> 
       </div> 
     </>
   )
