@@ -3,11 +3,9 @@ import { styled, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import CssBaseline from '@mui/material/CssBaseline';
-import Toolbar from '@mui/material/Toolbar';
 import List from '@mui/material/List';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
-import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import ListItem from '@mui/material/ListItem';
@@ -68,7 +66,7 @@ const PersistentDrawerLeft = ({open, setOpen}) => {
       >
         <DrawerHeader>
           <IconButton onClick={()=>setOpen(false)}>
-            {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
+            Menú {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
           </IconButton>
         </DrawerHeader>
         <Divider />
@@ -86,6 +84,14 @@ const PersistentDrawerLeft = ({open, setOpen}) => {
             <DriveFileRenameOutlineIcon />
             <ListItemText primary="Reportes"/>
             </ListItemIcon>
+          </ListItem>
+        </List>
+        <List>
+          <ListItem button onClick={()=>navigatee("/home")}>
+              <ListItemIcon>
+              <CurrencyExchangeIcon/>
+              <ListItemText primary="Home"/>
+              </ListItemIcon>
           </ListItem>
         </List>
         <Divider />

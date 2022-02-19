@@ -50,7 +50,7 @@ const Login = () => {
       localStorage.setItem("isLogin", isLogin)
       navigate("/home") 
     }
-  },[isLogin]);
+  },[isLogin, navigate]);
 
   return(
     <>
