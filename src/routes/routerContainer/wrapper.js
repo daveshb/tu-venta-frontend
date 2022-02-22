@@ -10,31 +10,36 @@ import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import { useNavigate } from "react-router-dom";
-import { PersistentDrawerLeft } from '../../components';
+import { PersistentDrawerLeft, CircularProgress  } from '../../components';
+import { onAuthStateChanged, signOut, auth } from '../../network/firebase';
 
 const Wrapper = ({children}) => {
   const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = useState(null);
   const [open, setOpen] = useState(false);
-
+  const [isUserSignedIn, setIsUserSignedIn] = useState(false);
+  const [userPhotoUrl, setUserPhotoUrl] = useState('');
+  
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);
   };
 
   const handleLoguot = () => {
-    localStorage.setItem("isLogin", false);
-    navigate("/");
+    signOut(auth).then(navigate("/"));
   }
 
   useEffect(()=>{
-    setAnchorEl(null);
-    debugger
-    let isLogin = localStorage.getItem("isLogin");
-    if(isLogin !== null && isLogin === "false"){
-      navigate("/")
-    }
+    onAuthStateChanged(auth, user => {
+      if(user){
+        setUserPhotoUrl(user.photoURL)
+        setIsUserSignedIn(true);
+      }else{
+        navigate("/")
+      }
+    });
   }, [navigate])
-
+  
+  if(isUserSignedIn){
   return(
    <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
@@ -76,9 +81,9 @@ const Wrapper = ({children}) => {
                   horizontal: 'right',
                 }}
                 open={Boolean(anchorEl)}
-                onClose={()=>handleLoguot()}
+                onClose={()=>setAnchorEl(false)}
               >
-                <MenuItem onClick={()=>{handleLoguot()}}>Cerrar Sesión</MenuItem>
+                <MenuItem onClick={() => handleLoguot()}>Cerrar Sesión</MenuItem>
               </Menu>
             </div>
         </Toolbar>
@@ -86,9 +91,12 @@ const Wrapper = ({children}) => {
       <Container maxWidth="md">
         {children}
       </Container>
-      <PersistentDrawerLeft open={open} setOpen={setOpen} />
+      <PersistentDrawerLeft open={open} setOpen={setOpen} userPhotoUrl={userPhotoUrl} />
     </Box>
   )
+}else{
+  return <CircularProgress />
+}
 };
 
 export default Wrapper;
