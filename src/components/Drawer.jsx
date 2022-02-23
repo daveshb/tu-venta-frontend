@@ -54,7 +54,7 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 }));
 
 const PersistentDrawerLeft = ({open, setOpen, userPhotoUrl}) => {
-  const navigatee = useNavigate();
+  const navigate = useNavigate();
   const theme = useTheme();
   const classes = useStyles();
 
@@ -82,7 +82,7 @@ const PersistentDrawerLeft = ({open, setOpen, userPhotoUrl}) => {
         </DrawerHeader>
         <Divider />
         <List>
-          <ListItem button onClick={()=>navigatee("/facturacion")}>
+          <ListItem button onClick={()=>navigate("/facturacion")}>
               <ListItemIcon>
               <CurrencyExchangeIcon/>
               <ListItemText primary="Facturación"/>
@@ -90,7 +90,7 @@ const PersistentDrawerLeft = ({open, setOpen, userPhotoUrl}) => {
           </ListItem>
         </List>
         <List>
-          <ListItem button onClick={()=>navigatee("/reportes")}>
+          <ListItem button onClick={()=>navigate("/reportes")}>
             <ListItemIcon>
             <DriveFileRenameOutlineIcon />
             <ListItemText primary="Reportes"/>
@@ -98,11 +98,19 @@ const PersistentDrawerLeft = ({open, setOpen, userPhotoUrl}) => {
           </ListItem>
         </List>
         <List>
-          <ListItem button onClick={()=>navigatee("/home")}>
+          <ListItem button onClick={()=>navigate("/home")}>
               <ListItemIcon>
               <CurrencyExchangeIcon/>
               <ListItemText primary="Home"/>
               </ListItemIcon>
+          </ListItem>
+        </List>
+        <List>
+          <ListItem button onClick={()=>navigate("/productos")}>
+            <ListItemIcon>
+            <DriveFileRenameOutlineIcon />
+            <ListItemText primary="Productos"/>
+            </ListItemIcon>
           </ListItem>
         </List>
         <Divider />
