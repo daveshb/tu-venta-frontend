@@ -16,6 +16,8 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import CurrencyExchangeIcon from '@mui/icons-material/CurrencyExchange';
 import DriveFileRenameOutlineIcon from '@mui/icons-material/DriveFileRenameOutline';
+import PeopleIcon from '@mui/icons-material/People';
+
 import { useNavigate } from "react-router-dom";
 
 const drawerWidth = 240;
@@ -110,6 +112,14 @@ const PersistentDrawerLeft = ({open, setOpen, userPhotoUrl}) => {
             <ListItemIcon>
             <DriveFileRenameOutlineIcon />
             <ListItemText primary="Productos"/>
+            </ListItemIcon>
+          </ListItem>
+        </List>
+        <List>
+          <ListItem button onClick={()=>navigate("/clientes")}>
+            <ListItemIcon>
+            <PeopleIcon />
+            <ListItemText primary="Clientes"/>
             </ListItemIcon>
           </ListItem>
         </List>

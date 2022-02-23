@@ -6,6 +6,7 @@ import Facturacion from '../../pages/facturacion';
 import Reportes from '../../pages/reportes';
 import Wrapper from "./wrapper";
 import Productos from '../../pages/productos';
+import Clientes from '../../pages/clientes';
 
 const RouterContainer = () => {
   return (
@@ -15,6 +16,7 @@ const RouterContainer = () => {
         <Route path="facturacion" element={<Wrapper><Facturacion /></Wrapper>}/>
         <Route path="reportes" element={<Wrapper><Reportes /></Wrapper>}/>
         <Route path="productos" element={<Wrapper><Productos /></Wrapper>}/>
+        <Route path="clientes" element={<Wrapper><Clientes /></Wrapper>}/>
       </Routes>
   );
 }
