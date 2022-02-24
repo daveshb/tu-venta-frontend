@@ -7,6 +7,8 @@ const Clientes = () =>{
   const [clientes, setClientes] = useState([]);
   const [open, setOpen] = useState(false);
   const clientesCollectionRef = collection(db, "terceros");
+
+  const [filter, setFilter] = useState([]);
   
  
 
@@ -27,13 +29,34 @@ const Clientes = () =>{
   const obtenerClientes = async () => {
     const datac = await getDocs(clientesCollectionRef);
     setClientes(datac.docs.map(doc => ({ ...doc.data(),  id: doc.id})));
+
     
+
+
+    
+    
+
+
+  
+
+
+
   }
 
+
+   
+      
+      
+
+  
   useEffect(()=>{
     obtenerClientes();
-    console.log(clientes);
-  }, [])
+
+    setFilter(clientes.filter(docs => {
+      return docs.type === "2" }));
+      console.log("Clientes", clientes);
+    console.log("fliter**",filter);
+  }, []);
   
   return (
     <div>
@@ -43,6 +66,7 @@ const Clientes = () =>{
     
   )
 }
+
 
 export default Clientes;
 
