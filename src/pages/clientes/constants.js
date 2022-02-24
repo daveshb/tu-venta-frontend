@@ -24,12 +24,6 @@ export const headCells = [
     label: 'Nombre',
   },
   {
-    id: 'id',
-    numeric: false,
-    disablePadding: false,
-    label: 'ID',
-  },
-  {
     id: 'phone',
     numeric: false,
     disablePadding: false,

@@ -294,7 +294,7 @@ export default function EnhancedTable({clientes, handleDelete, setOpen}) {
                       <TableCell align="left">{row.documentType}</TableCell>
                       <TableCell align="left">{row.email}</TableCell>
                       <TableCell align="left">{row.fullName}</TableCell>
-                      <TableCell align="left">{row.id}</TableCell>
+                      
                       <TableCell align="left">{row.phone}</TableCell>
                       <TableCell align="left">{row.type}</TableCell>
                       <TableCell padding="checkbox">
