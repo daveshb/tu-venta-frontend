@@ -1,32 +1,44 @@
 export const headCells = [
   {
-    id: 'codigo',
+    id: 'documentNumber',
     numeric: false,
     disablePadding: true,
-    label: 'Código',
+    label: 'Numero de documento',
   },
   {
-    id: 'nombre',
+    id: 'docuemtType',
+    numeric: false,
+    disablePadding: false,
+    label: 'Tipo de docuemento',
+  },
+  {
+    id: 'email',
+    numeric: false,
+    disablePadding: false,
+    label: 'Correo electronico',
+  },
+  {
+    id: 'fullName',
     numeric: false,
     disablePadding: false,
     label: 'Nombre',
   },
   {
-    id: 'fechaVencimiento',
+    id: 'id',
     numeric: false,
     disablePadding: false,
-    label: 'Fecha vencimiento',
+    label: 'ID',
   },
   {
-    id: 'lote',
+    id: 'phone',
     numeric: false,
     disablePadding: false,
-    label: 'Lote',
+    label: 'Telefono',
   },
   {
-    id: 'estado',
+    id: 'type',
     numeric: false,
     disablePadding: false,
-    label: 'Estado',
+    label: 'tipo',
   },
 ];

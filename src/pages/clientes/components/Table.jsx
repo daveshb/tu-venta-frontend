@@ -130,7 +130,7 @@ const EnhancedTableToolbar = (props) => {
           variant="subtitle1"
           component="div"
         >
-          {numSelected} selected
+          {numSelected} seleccionado
         </Typography>
       ) : (
         <Typography
@@ -153,7 +153,7 @@ const EnhancedTableToolbar = (props) => {
           </IconButton>
         </Tooltip>
       ) : (
-        <Tooltip title="Filter list">
+        <Tooltip title="Adicionar Cliente">
           <IconButton>
             <AddCircle onClick={()=>setOpen(true)} />
           </IconButton>
@@ -167,7 +167,7 @@ EnhancedTableToolbar.propTypes = {
   numSelected: PropTypes.number.isRequired,
 };
 
-export default function EnhancedTable({productos, handleDelete, setOpen}) {
+export default function EnhancedTable({clientes, handleDelete, setOpen}) {
   const [order, setOrder] = React.useState('asc');
   const [orderBy, setOrderBy] = React.useState('nombre');
   const [selected, setSelected] = React.useState([]);
@@ -183,7 +183,7 @@ export default function EnhancedTable({productos, handleDelete, setOpen}) {
 
   const handleSelectAllClick = (event) => {
     if (event.target.checked) {
-      const newSelecteds = productos.map((n) => n.name);
+      const newSelecteds = clientes.map((n) => n.name);
       setSelected(newSelecteds);
       return;
     }
@@ -227,11 +227,11 @@ export default function EnhancedTable({productos, handleDelete, setOpen}) {
 
   // Avoid a layout jump when reaching the last page with empty rows.
   const emptyRows =
-    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - productos.length) : 0;
+    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - clientes.length) : 0;
 
   return (
-    <Box sx={{ width: '100%' }}>
-      <Paper sx={{ width: '100%', mb: 2 }}>
+    <Box sx={{ width: '200%' }}>
+      <Paper sx={{ width: '60%', mb: 2 }}>
         <EnhancedTableToolbar 
         numSelected={selected.length} 
         handleDelete={handleDelete} 
@@ -251,12 +251,12 @@ export default function EnhancedTable({productos, handleDelete, setOpen}) {
               orderBy={orderBy}
               onSelectAllClick={handleSelectAllClick}
               onRequestSort={handleRequestSort}
-              rowCount={productos.length}
+              rowCount={clientes.length}
             />
             <TableBody>
               {/* if you don't need to support IE11, you can replace the `stableSort` call with:
                  rows.slice().sort(getComparator(order, orderBy)) */}
-              {stableSort(productos, getComparator(order, orderBy))
+              {stableSort(clientes, getComparator(order, orderBy))
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row, index) => {
                   const isItemSelected = isSelected(row.id);
@@ -282,18 +282,21 @@ export default function EnhancedTable({productos, handleDelete, setOpen}) {
                           }}
                         />
                       </TableCell>
-                      <TableCell
+                      {/* <TableCell
                         component="th"
                         id={labelId}
                         scope="row"
                         padding="none"
                       >
                         {row.codigo}
-                      </TableCell>
-                      <TableCell align="left">{row.nombre}</TableCell>
-                      <TableCell align="left">{row.fechaVencimiento.seconds}</TableCell>
-                      <TableCell align="left">{row.lote}</TableCell>
-                      <TableCell align="left">{row.estado ? 'Activo' : 'Inactivo'}</TableCell>
+                      </TableCell> */}
+                      <TableCell align="left">{row.documentNumber}</TableCell>
+                      <TableCell align="left">{row.documentType}</TableCell>
+                      <TableCell align="left">{row.email}</TableCell>
+                      <TableCell align="left">{row.fullName}</TableCell>
+                      <TableCell align="left">{row.id}</TableCell>
+                      <TableCell align="left">{row.phone}</TableCell>
+                      <TableCell align="left">{row.type}</TableCell>
                       <TableCell padding="checkbox">
                         <Add style={{cursor: 'pointer'}} />
                       </TableCell>
@@ -315,7 +318,7 @@ export default function EnhancedTable({productos, handleDelete, setOpen}) {
         <TablePagination
           rowsPerPageOptions={[5, 10, 25]}
           component="div"
-          count={productos.length}
+          count={clientes.length}
           rowsPerPage={rowsPerPage}
           page={page}
           onPageChange={handleChangePage}

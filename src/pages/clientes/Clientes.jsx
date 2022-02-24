@@ -3,41 +3,46 @@ import { Modal } from '../../components';
 import Table from './components/Table';
 import { collection, db, getDocs, deleteDoc, doc, addDoc } from '../../network/firebase';
 
-const Productos = () =>{
-  const [productos, setProductos] = useState([]);
+const Clientes = () =>{
+  const [clientes, setClientes] = useState([]);
   const [open, setOpen] = useState(false);
-  const productosCollectionRef = collection(db, "products");
+  const clientesCollectionRef = collection(db, "terceros");
+  
+ 
 
-  const eliminarProducto = (productos) => {
-    productos.map(async id =>{
-      const productoDoc = doc(db, "products", id);
-      await deleteDoc(productoDoc);
-      obtenerProductos();
+  const eliminarClientes = (clientes) => {
+    clientes.map(async id =>{
+      const clienteDoc = doc(db, "terceros", id);
+      await deleteDoc(clienteDoc);
+      obtenerClientes();
     })
   }
 
-  const guardarProducto = async (data) => {
-    await addDoc(productosCollectionRef, {...data, fechaVencimiento: 1645583947, estado: true});
+  const guardarClientes = async (datac) => {
+    await addDoc(clientesCollectionRef, {...datac});
     setOpen(false);
-    obtenerProductos();
+    obtenerClientes();
   }
 
-  const obtenerProductos = async () => {
-    const data = await getDocs(productosCollectionRef);
-    setProductos(data.docs.map(doc => ({ ...doc.data(), id: doc.id })));
+  const obtenerClientes = async () => {
+    const datac = await getDocs(clientesCollectionRef);
+    setClientes(datac.docs.map(doc => ({ ...doc.data(),  id: doc.id})));
+    
   }
 
   useEffect(()=>{
-    obtenerProductos();
+    obtenerClientes();
+    console.log(clientes);
   }, [])
-
+  
   return (
     <div>
-      <Table productos={productos} handleDelete={eliminarProducto} setOpen={setOpen} />
-      <Modal open={open} setOpen={setOpen} tipoFormulario="productos" handleSubmit={guardarProducto} />
+      <Table clientes={clientes} handleDelete={eliminarClientes} setOpen={setOpen} />
+      <Modal open={open} setOpen={setOpen} tipoFormulario="clientes" handleSubmit={guardarClientes} />
     </div>
     
   )
 }
 
-export default Productos;
+export default Clientes;
+
