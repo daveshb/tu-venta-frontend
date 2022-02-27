@@ -2,6 +2,7 @@ import * as React from 'react';
 import { styled, Box } from '@mui/system';
 import ModalUnstyled from '@mui/base/ModalUnstyled';
 import FormularioProductos from '../pages/productos/components/Formulario';
+import FormularioClientes from '../pages/clientes/components/Formulario'
 
 const StyledModal = styled(ModalUnstyled)`
   position: fixed;
@@ -39,8 +40,14 @@ export default function ModalUnstyledDemo({open, setOpen, tipoFormulario, handle
     switch(tipoFormulario){
       case "productos":
         return <FormularioProductos handleSubmit={handleSubmit} />
-      default:
       break;
+
+      case "clientes":
+        return <FormularioClientes handleSubmit={handleSubmit} />
+      break;
+
+      default:
+        
     }
   }
   return (

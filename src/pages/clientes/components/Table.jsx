@@ -173,7 +173,7 @@ export default function EnhancedTable({clientes, handleDelete, setOpen}) {
   const [selected, setSelected] = React.useState([]);
   const [page, setPage] = React.useState(0);
   const [dense, setDense] = React.useState(false);
-  const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';
@@ -230,8 +230,8 @@ export default function EnhancedTable({clientes, handleDelete, setOpen}) {
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - clientes.length) : 0;
 
   return (
-    <Box sx={{ width: '200%' }}>
-      <Paper sx={{ width: '60%', mb: 2 }}>
+    <Box sx={{ width: '100%' }}>
+      <Paper sx={{ width: '100%', mb: 2 }}>
         <EnhancedTableToolbar 
         numSelected={selected.length} 
         handleDelete={handleDelete} 
@@ -296,10 +296,10 @@ export default function EnhancedTable({clientes, handleDelete, setOpen}) {
                       <TableCell align="left">{row.fullName}</TableCell>
                       
                       <TableCell align="left">{row.phone}</TableCell>
-                      <TableCell align="left">{row.type}</TableCell>
-                      <TableCell padding="checkbox">
+                      {/* <TableCell align="left">{row.type}</TableCell> */}
+                      {/* <TableCell padding="checkbox">
                         <Add style={{cursor: 'pointer'}} />
-                      </TableCell>
+                      </TableCell> */}
                     </TableRow>
                   );
                 })}

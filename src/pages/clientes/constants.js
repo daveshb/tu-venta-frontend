@@ -29,10 +29,5 @@ export const headCells = [
     disablePadding: false,
     label: 'Telefono',
   },
-  {
-    id: 'type',
-    numeric: false,
-    disablePadding: false,
-    label: 'tipo',
-  },
+ 
 ];

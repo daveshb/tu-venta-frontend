@@ -3,14 +3,19 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 
+
+
 export default function Formulario({handleSubmit}) {
   const [data, setData] = React.useState({
-    codigo: "",
-    nombre: "",
-    fechaVencimiento: "",
-    lote: "",
+    documentNumber: "",
+    documentType: "",
+    email: "",
+    fullName: "",
+    id: "",
+    phone: "",
   })
   return (
+
     <Box
       component="form"
       sx={{
@@ -19,24 +24,61 @@ export default function Formulario({handleSubmit}) {
       noValidate
       autoComplete="off"
     >
+      
       <TextField 
-      name="codigo" 
-      value={data.codigo} 
-      onChange={(event)=>setData({...data, codigo: event.target.value })} 
+      name="documentNumber" 
+      value={data.documentNumber} 
+      onChange={(event)=>setData({...data, documentNumber: event.target.value })} 
       id="outlined-basic" 
-      label="Código" 
+      label="Numero de documento" 
+      variant="outlined" 
       InputLabelProps={{
             shrink: true,
           }} />
-      <TextField name="nombre" value={data.nombre} onChange={(event)=>setData({...data, nombre: event.target.value })} id="outlined-basic" label="Nombre" variant="outlined" InputLabelProps={{
+
+      <TextField 
+      name="documentType" 
+      value={data.documentType} 
+      onChange={(event)=>setData({...data, documentType: event.target.value })}  
+      id="outlined-basic" label="Tipo de documento" 
+      variant="outlined" InputLabelProps={{
             shrink: true,
           }} />
-      <TextField name="fechaVencimiento" value={data.fechaVencimiento} onChange={(event)=>setData({...data, fechaVencimiento: event.target.value })}  id="outlined-basic" label="Fecha Vencimiento" variant="outlined" InputLabelProps={{
+
+      <TextField 
+      name="email" 
+      value={data.email} 
+      onChange={(event)=>setData({...data, email: event.target.value })} 
+      id="outlined-basic" 
+      label="correo electrónico" 
+      variant="outlined" InputLabelProps={{
             shrink: true,
           }} />
-      <TextField name="lote" value={data.lote} onChange={(event)=>setData({...data, lote: event.target.value })} id="outlined-basic" label="Lote" variant="outlined" InputLabelProps={{
+
+       <TextField 
+       name="fullName" 
+       value={data.fullName} 
+       onChange={(event)=>setData({...data, fullName: event.target.value })} 
+       id="outlined-basic" label="Nombre" variant="outlined" InputLabelProps={{
             shrink: true,
           }} />
+
+       <TextField 
+       name="id" 
+       value={data.id} 
+       onChange={(event)=>setData({...data, id: event.target.value })} 
+       id="outlined-basic" label="id" variant="outlined" InputLabelProps={{
+            shrink: true,
+          }} />
+
+        <TextField 
+        name="phone" 
+        value={data.phone} 
+        onChange={(event)=>setData({...data, phone: event.target.value })} 
+        id="outlined-basic" label="Telefono" variant="outlined" InputLabelProps={{
+            shrink: true,
+          }} />
+        
       <Button variant="contained" onClick={()=>handleSubmit(data)}>Agregar</Button>
     </Box>
   );

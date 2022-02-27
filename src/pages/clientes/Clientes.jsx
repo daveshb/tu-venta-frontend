@@ -7,11 +7,9 @@ const Clientes = () =>{
   const [clientes, setClientes] = useState([]);
   const [open, setOpen] = useState(false);
   const clientesCollectionRef = collection(db, "terceros");
-
+  const [get, setGet] = useState([]);
   const [filter, setFilter] = useState([]);
   
- 
-
   const eliminarClientes = (clientes) => {
     clientes.map(async id =>{
       const clienteDoc = doc(db, "terceros", id);
@@ -20,44 +18,31 @@ const Clientes = () =>{
     })
   }
 
-  const guardarClientes = async (datac) => {
-    await addDoc(clientesCollectionRef, {...datac});
+  const guardarClientes = async (data) => {
+    await addDoc(clientesCollectionRef, {...data, type: "1"});
     setOpen(false);
     obtenerClientes();
   }
 
+
   const obtenerClientes = async () => {
     const datac = await getDocs(clientesCollectionRef);
-    setClientes(datac.docs.map(doc => ({ ...doc.data(),  id: doc.id})));
-
-    
-
-
-    
-    
-
-
-  
-
-
-
+    setGet(datac.docs.map(doc => ({ ...doc.data(),  id: doc.id})));
   }
 
-
-   
-      
-      
-
-  
   useEffect(()=>{
     obtenerClientes();
-
-    setFilter(clientes.filter(docs => {
-      return docs.type === "2" }));
-      console.log("Clientes", clientes);
-    console.log("fliter**",filter);
   }, []);
-  
+
+  useEffect(()=>{
+    setFilter(get.filter(docs => docs.type === "1" ));
+  },[get]);
+
+  useEffect(()=>{
+    setClientes(filter);
+    console.log("Clientes*",clientes);
+  },[filter]);
+ 
   return (
     <div>
       <Table clientes={clientes} handleDelete={eliminarClientes} setOpen={setOpen} />
@@ -66,7 +51,6 @@ const Clientes = () =>{
     
   )
 }
-
 
 export default Clientes;
 
