@@ -23,6 +23,8 @@ import { visuallyHidden } from '@mui/utils';
 import {headCells} from '../constants';
 import Add from '@mui/icons-material/AddCircle';
 import AddCircle from '@mui/icons-material/AddCircle';
+import Pencil from '@mui/icons-material/Edit';
+import PencilOff from '@mui/icons-material/EditOff';
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -123,6 +125,8 @@ const EnhancedTableToolbar = (props) => {
         }),
       }}
     >
+
+    
       {numSelected > 0 ? (
         <Typography
           sx={{ flex: '1 1 100%' }}
@@ -142,6 +146,31 @@ const EnhancedTableToolbar = (props) => {
           Clientes
         </Typography>
       )}
+
+      {numSelected == 1 ? (
+        <Tooltip title="Edit">
+          <IconButton>
+            <Pencil onClick={()=>{
+              setSelected([]);
+              // handleDelete(selected);
+              
+              }} />
+          </IconButton>
+        </Tooltip>
+      ) : (
+        <Tooltip title="Selecciona un Cliente">
+          <IconButton>
+            <PencilOff>
+
+            </PencilOff>
+            {/* <PencilOff onClick={()=>setOpen(true)} /> */}
+          </IconButton>
+        </Tooltip>
+      )}  
+
+
+
+
 
       {numSelected > 0 ? (
         <Tooltip title="Delete">
