@@ -5,11 +5,12 @@ import { collection, db, getDocs, deleteDoc, doc, addDoc } from '../../network/f
 
 const Clientes = () =>{
   const [clientes, setClientes] = useState([]);
+
   const [open, setOpen] = useState(false);
   const clientesCollectionRef = collection(db, "terceros");
   const [get, setGet] = useState([]);
   const [filter, setFilter] = useState([]);
-  
+
   const eliminarClientes = (clientes) => {
     clientes.map(async id =>{
       const clienteDoc = doc(db, "terceros", id);
@@ -24,7 +25,6 @@ const Clientes = () =>{
     obtenerClientes();
   }
 
-
   const obtenerClientes = async () => {
     const datac = await getDocs(clientesCollectionRef);
     setGet(datac.docs.map(doc => ({ ...doc.data(),  id: doc.id})));
@@ -37,12 +37,18 @@ const Clientes = () =>{
   useEffect(()=>{
     setFilter(get.filter(docs => docs.type === "1" ));
   },[get]);
-
+  
   useEffect(()=>{
     setClientes(filter);
     console.log("Clientes*",clientes);
   },[filter]);
- 
+
+
+
+
+
+
+
   return (
     <div>
       <Table clientes={clientes} handleDelete={eliminarClientes} setOpen={setOpen} />
