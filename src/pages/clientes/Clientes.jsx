@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Modal } from '../../components';
 import Table from './components/Table';
-import { collection, db, getDocs, deleteDoc, doc, addDoc } from '../../network/firebase';
+import { collection, db, getDocs, deleteDoc, doc, addDoc, updateDoc, arrayUnion, arrayRemove  } from '../../network/firebase';
 
 const Clientes = () =>{
   const [clientes, setClientes] = useState([]);
@@ -19,11 +19,26 @@ const Clientes = () =>{
     })
   }
 
+  const actualizaCliente = async (id) => {
+    const cliente = doc(db, "terceros", id);
+
+    await updateDoc(cliente,{email: arrayRemove("luisa@dsklfmds.com")});
+    // await updateDoc(cliente,{email: arrayUnion("prueba@prueba")});
+    obtenerClientes();
+    console.log(clientes);
+    }
+     
+
+  
+
   const guardarClientes = async (data) => {
     await addDoc(clientesCollectionRef, {...data, type: "1"});
     setOpen(false);
     obtenerClientes();
   }
+
+
+
 
   const obtenerClientes = async () => {
     const datac = await getDocs(clientesCollectionRef);
@@ -51,7 +66,7 @@ const Clientes = () =>{
 
   return (
     <div>
-      <Table clientes={clientes} handleDelete={eliminarClientes} setOpen={setOpen} />
+      <Table clientes={clientes} handleDelete={eliminarClientes} setOpen={setOpen} actualizaCliente={actualizaCliente} />
       <Modal open={open} setOpen={setOpen} tipoFormulario="clientes" handleSubmit={guardarClientes} />
     </div>
     

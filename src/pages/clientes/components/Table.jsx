@@ -112,7 +112,7 @@ EnhancedTableHead.propTypes = {
 };
 
 const EnhancedTableToolbar = (props) => {
-  const { numSelected, handleDelete, selected, setSelected, setOpen } = props;
+  const { numSelected, handleDelete, selected, setSelected, setOpen, actualizaCliente } = props;
 
   return (
     <Toolbar
@@ -151,8 +151,10 @@ const EnhancedTableToolbar = (props) => {
         <Tooltip title="Edit">
           <IconButton>
             <Pencil onClick={()=>{
-              setSelected([]);
-              // handleDelete(selected);
+             
+            //  setSelected([]);
+            actualizaCliente(selected);
+              
               
               }} />
           </IconButton>
@@ -161,9 +163,7 @@ const EnhancedTableToolbar = (props) => {
         <Tooltip title="Selecciona un Cliente">
           <IconButton>
             <PencilOff>
-
             </PencilOff>
-            {/* <PencilOff onClick={()=>setOpen(true)} /> */}
           </IconButton>
         </Tooltip>
       )}  
