@@ -190,7 +190,7 @@ export default function EnhancedTable({clientes, handleDelete, setOpen ,setId, s
 
   const handleSelectAllClick = (event) => {
     if (event.target.checked) {
-      const newSelecteds = clientes.map((n) => n.name);
+      const newSelecteds = clientes.map((n) => n.id);
       setSelected(newSelecteds);
       return;
     }
