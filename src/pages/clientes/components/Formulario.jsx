@@ -6,8 +6,6 @@ import Button from '@mui/material/Button';
 
 export default function Formulario({handleSubmit}) {
 
-
-
   const [data, setData] = React.useState({
     documentNumber: "",
     documentType: "",
@@ -17,9 +15,6 @@ export default function Formulario({handleSubmit}) {
     phone: "",
   })
 
-    // setData(select);
-  
-  
   return (
 
     <Box

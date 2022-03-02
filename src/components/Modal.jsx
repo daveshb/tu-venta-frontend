@@ -68,9 +68,7 @@ export default function ModalUnstyledDemo({open, setOpen, tipoFormulario, handle
         open={open}
         onClose={()=>{
           setOpen(false);
-          
           setTipoForm("clientes");
-          
         }}
         BackdropComponent={Backdrop}
       >

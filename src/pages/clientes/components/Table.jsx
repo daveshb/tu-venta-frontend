@@ -24,7 +24,7 @@ import {headCells} from '../constants';
 import Add from '@mui/icons-material/AddCircle';
 import AddCircle from '@mui/icons-material/AddCircle';
 import Pencil from '@mui/icons-material/Edit';
-import { SettingsSystemDaydreamTwoTone } from '@material-ui/icons';
+
 
 
 function descendingComparator(a, b, orderBy) {
@@ -54,7 +54,6 @@ function stableSort(array, comparator) {
   });
   return stabilizedThis.map((el) => el[0]);
 }
-
 
 function EnhancedTableHead(props) {
   const { onSelectAllClick, order, orderBy, numSelected, rowCount, onRequestSort } =
@@ -180,7 +179,7 @@ EnhancedTableToolbar.propTypes = {
   numSelected: PropTypes.number.isRequired,
 };
 
-export default function EnhancedTable({clientes, handleDelete, setOpen ,setId, setTipoForm }) {
+export default function EnhancedTable({clientes, handleDelete, setOpen ,setId }) {
   const [order, setOrder] = React.useState('asc');
   const [orderBy, setOrderBy] = React.useState('nombre');
   const [selected, setSelected] = React.useState([]);
@@ -193,8 +192,6 @@ export default function EnhancedTable({clientes, handleDelete, setOpen ,setId, s
     setOrder(isAsc ? 'desc' : 'asc');
     setOrderBy(property);
   };
-
-  
 
   const handleSelectAllClick = (event) => {
     if (event.target.checked) {
@@ -225,13 +222,10 @@ export default function EnhancedTable({clientes, handleDelete, setOpen ,setId, s
     setSelected(newSelected);
   };
 
-
-
   const handleClickUpdate = (e , idUpdate) => {
-  
     setId(idUpdate);
     setOpen(true);
-        
+   
   }
 
   const handleChangePage = (event, newPage) => {
@@ -248,17 +242,11 @@ export default function EnhancedTable({clientes, handleDelete, setOpen ,setId, s
   };
 
 
-
-
-
   const isSelected = (name) => selected.indexOf(name) !== -1;
 
   // Avoid a layout jump when reaching the last page with empty rows.
   const emptyRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - clientes.length) : 0;
-
-
-
 
   return (
     <Box sx={{ width: '100%' }}>
@@ -293,8 +281,6 @@ export default function EnhancedTable({clientes, handleDelete, setOpen ,setId, s
                   const isItemSelected = isSelected(row.id);
                   const labelId = `enhanced-table-checkbox-${index}`;
 
-                 
-
                   return (
                     <TableRow
                       hover
@@ -306,7 +292,6 @@ export default function EnhancedTable({clientes, handleDelete, setOpen ,setId, s
                       selected={isItemSelected}
                     >
                       <TableCell padding="checkbox">
-                        
                         <Checkbox
                           color="primary"
                           checked={isItemSelected}
@@ -315,25 +300,12 @@ export default function EnhancedTable({clientes, handleDelete, setOpen ,setId, s
                           }}
                         />
                       </TableCell>
-                      {/* <TableCell
-                        component="th"
-                        id={labelId}
-                        scope="row"
-                        padding="none"
-                      >
-                        {row.codigo}
-                      </TableCell> */}
                       <TableCell align="left">{row.documentNumber}</TableCell>
                       <TableCell align="left">{row.documentType}</TableCell>
                       <TableCell align="left">{row.email}</TableCell>
                       <TableCell align="left">{row.fullName}</TableCell>
-                      
                       <TableCell align="left">{row.phone}</TableCell>
-                      {/* <TableCell align="left">{row.id}</TableCell> */}
-
-                      
                       <TableCell padding="checkbox"> 
-
                          <Pencil
                          hover
                          onClick={(e)=> {handleClickUpdate(e , row.id)}}
@@ -342,11 +314,7 @@ export default function EnhancedTable({clientes, handleDelete, setOpen ,setId, s
                          key={row.id}
                          selected={isItemSelected}
                          >
-                        
                         </Pencil>
-                        
-                        
-
                       </TableCell>
                     </TableRow>
                   );

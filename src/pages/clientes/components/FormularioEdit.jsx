@@ -4,11 +4,7 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 
 
-
 export default function FormularioEdit({ select , handleSubmit2}) {
-
-
-
 
   const [data, setData] = React.useState({
     documentNumber: select.documentNumber,
@@ -19,7 +15,6 @@ export default function FormularioEdit({ select , handleSubmit2}) {
     phone: select.phone,
   })
 
-  
   return (
 
     <Box
@@ -86,7 +81,6 @@ export default function FormularioEdit({ select , handleSubmit2}) {
           }} />
         
       <Button variant="contained" onClick={()=>handleSubmit2(data)}>Actualizar</Button>
-
     </Box>
   );
 }

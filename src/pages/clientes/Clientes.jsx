@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Modal } from '../../components';
 import Table from './components/Table';
-import { collection, db, getDocs, deleteDoc, doc, addDoc, updateDoc, arrayUnion, arrayRemove  } from '../../network/firebase';
+import { collection, db, getDocs, deleteDoc, doc, addDoc, updateDoc } from '../../network/firebase';
 
 const Clientes = () =>{
 
-  
   const [clientes, setClientes] = useState([]);
   const [id, setId] = useState([]);
   const [open, setOpen] = useState(false);
@@ -13,12 +12,8 @@ const Clientes = () =>{
   const [get, setGet] = useState([]);
   const [filter, setFilter] = useState([]);
   const [select, setSelect] = useState([]);
-  const [tipoForm, setTipoForm] = useState("");
+  const [tipoForm, setTipoForm] = useState("clientes");
   
-  
-  
-
-
   const eliminarClientes = (clientes) => {
     clientes.map(async id =>{
       const clienteDoc = doc(db, "terceros", id);
@@ -27,38 +22,29 @@ const Clientes = () =>{
     })
   }
 
-
-
-
-
   const actualizaCliente = async(data) => {
-
-    
     const clienteUp = doc(db, "terceros", `${id}`);
      await updateDoc(clienteUp, {...data} );
     setOpen(false);
     obtenerClientes();
   }
   
-
   const guardarClientes = async (data) => {
     await addDoc(clientesCollectionRef, {...data, type: "1"});
     setOpen(false);
     obtenerClientes();
   }
 
-
-
-
   const obtenerClientes = async () => {
     const datac = await getDocs(clientesCollectionRef);
     setGet(datac.docs.map(doc => ({ ...doc.data(),  id: doc.id})));
+    setTipoForm("clientes");
+    
     
   }
 
   useEffect(()=>{
     obtenerClientes();
-    
   }, []);
 
   useEffect(()=>{
@@ -69,22 +55,12 @@ const Clientes = () =>{
     setClientes(filter);
   },[filter]);
 
-
 const filtroId = clientes.filter(docs => docs.id == id);
-
 
   useEffect(()=>{
     setSelect((filtroId[0]));
     setTipoForm("edit");
   },[id]);
-
-
-  useEffect(()=>{
-    console.log("Tipo de form",tipoForm);
-  },[tipoForm]);
-
-
-
 
   return (
     <div>
