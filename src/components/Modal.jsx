@@ -53,9 +53,6 @@ export default function ModalUnstyledDemo({open, setOpen, tipoFormulario, handle
         select={select}
        />
       break;
-
-    
-
       default:
         
     }

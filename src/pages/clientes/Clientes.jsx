@@ -39,8 +39,6 @@ const Clientes = () =>{
     const datac = await getDocs(clientesCollectionRef);
     setGet(datac.docs.map(doc => ({ ...doc.data(),  id: doc.id})));
     setTipoForm("clientes");
-    
-    
   }
 
   useEffect(()=>{
@@ -61,6 +59,7 @@ const filtroId = clientes.filter(docs => docs.id == id);
     setSelect((filtroId[0]));
     setTipoForm("edit");
   },[id]);
+
 
   return (
     <div>

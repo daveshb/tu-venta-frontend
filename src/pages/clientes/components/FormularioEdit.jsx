@@ -64,14 +64,6 @@ export default function FormularioEdit({ select , handleSubmit2}) {
             shrink: true,
           }} />
 
-       <TextField 
-       name="id" 
-       value={data.id} 
-       onChange={(event)=>setData({...data, id: event.target.value })} 
-       id="outlined-basic" label="id" variant="outlined" InputLabelProps={{
-            shrink: true,
-          }} />
-
         <TextField 
         name="phone" 
         value={data.phone} 

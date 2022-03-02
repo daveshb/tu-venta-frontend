@@ -112,11 +112,8 @@ EnhancedTableHead.propTypes = {
 };
 
 export const EnhancedTableToolbar = (props) => {
-  const { numSelected, handleDelete, selected, setSelected , setOpen  } = props;
+  const { numSelected, handleDelete, selected, setSelected , setOpen, setTipoForm  } = props;
 
-  
-
- 
   return (
     <Toolbar
       sx={{
@@ -129,7 +126,6 @@ export const EnhancedTableToolbar = (props) => {
       }}
     >
 
-    
       {numSelected > 0 ? (
         <Typography
           sx={{ flex: '1 1 100%' }}
@@ -164,9 +160,8 @@ export const EnhancedTableToolbar = (props) => {
           <IconButton>
             <AddCircle 
             onClick={()=> {
-               setOpen(true);
-            }}
-            
+              setOpen(true);
+              }}
             />
           </IconButton>
         </Tooltip>
@@ -179,7 +174,7 @@ EnhancedTableToolbar.propTypes = {
   numSelected: PropTypes.number.isRequired,
 };
 
-export default function EnhancedTable({clientes, handleDelete, setOpen ,setId }) {
+export default function EnhancedTable({clientes, handleDelete, setOpen ,setId, setTipoForm }) {
   const [order, setOrder] = React.useState('asc');
   const [orderBy, setOrderBy] = React.useState('nombre');
   const [selected, setSelected] = React.useState([]);
@@ -224,8 +219,8 @@ export default function EnhancedTable({clientes, handleDelete, setOpen ,setId })
 
   const handleClickUpdate = (e , idUpdate) => {
     setId(idUpdate);
+    setTipoForm("edit");
     setOpen(true);
-   
   }
 
   const handleChangePage = (event, newPage) => {
@@ -241,10 +236,8 @@ export default function EnhancedTable({clientes, handleDelete, setOpen ,setId })
     setDense(event.target.checked);
   };
 
-
   const isSelected = (name) => selected.indexOf(name) !== -1;
 
-  // Avoid a layout jump when reaching the last page with empty rows.
   const emptyRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - clientes.length) : 0;
 
@@ -273,8 +266,6 @@ export default function EnhancedTable({clientes, handleDelete, setOpen ,setId })
               rowCount={clientes.length}
             />
             <TableBody>
-              {/* if you don't need to support IE11, you can replace the `stableSort` call with:
-                 rows.slice().sort(getComparator(order, orderBy)) */}
               {stableSort(clientes, getComparator(order, orderBy))
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row, index) => {
