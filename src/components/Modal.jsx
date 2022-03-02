@@ -2,7 +2,8 @@ import * as React from 'react';
 import { styled, Box } from '@mui/system';
 import ModalUnstyled from '@mui/base/ModalUnstyled';
 import FormularioProductos from '../pages/productos/components/Formulario';
-import FormularioClientes from '../pages/clientes/components/Formulario'
+import FormularioClientes from '../pages/clientes/components/Formulario';
+import FormularioEdit from '../pages/clientes/components/FormularioEdit';
 
 const StyledModal = styled(ModalUnstyled)`
   position: fixed;
@@ -35,16 +36,25 @@ const style = {
   pb: 3,
 };
 
-export default function ModalUnstyledDemo({open, setOpen, tipoFormulario, handleSubmit}) {
-  const mostrarFormulario = () => {
+export default function ModalUnstyledDemo({open, setOpen, tipoFormulario, handleSubmit, select, handleSubmit2 ,setTipoForm, setId }) {
+    const mostrarFormulario = () => {
     switch(tipoFormulario){
       case "productos":
         return <FormularioProductos handleSubmit={handleSubmit} />
       break;
 
       case "clientes":
-        return <FormularioClientes handleSubmit={handleSubmit} />
+        return <FormularioClientes handleSubmit={handleSubmit}/>
       break;
+
+
+      case "edit":
+        return <FormularioEdit handleSubmit2={handleSubmit2}
+        select={select}
+       />
+      break;
+
+    
 
       default:
         
@@ -56,7 +66,12 @@ export default function ModalUnstyledDemo({open, setOpen, tipoFormulario, handle
         aria-labelledby="unstyled-modal-title"
         aria-describedby="unstyled-modal-description"
         open={open}
-        onClose={()=>setOpen(false)}
+        onClose={()=>{
+          setOpen(false);
+          
+          setTipoForm("clientes");
+          
+        }}
         BackdropComponent={Backdrop}
       >
         <Box sx={style}>

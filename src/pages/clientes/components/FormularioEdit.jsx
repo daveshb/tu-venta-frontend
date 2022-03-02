@@ -4,21 +4,21 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 
 
-export default function Formulario({handleSubmit}) {
+
+export default function FormularioEdit({ select , handleSubmit2}) {
+
 
 
 
   const [data, setData] = React.useState({
-    documentNumber: "",
-    documentType: "",
-    email: "",
-    fullName: "",
-    id: "",
-    phone: "",
+    documentNumber: select.documentNumber,
+    documentType: select.documentType,
+    email: select.email,
+    fullName: select.fullName,
+    id: select.id,
+    phone: select.phone,
   })
 
-    // setData(select);
-  
   
   return (
 
@@ -85,7 +85,8 @@ export default function Formulario({handleSubmit}) {
             shrink: true,
           }} />
         
-      <Button variant="contained" onClick={()=>handleSubmit(data)}>Agregar</Button>
+      <Button variant="contained" onClick={()=>handleSubmit2(data)}>Actualizar</Button>
+
     </Box>
   );
 }

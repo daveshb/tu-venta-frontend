@@ -4,12 +4,20 @@ import Table from './components/Table';
 import { collection, db, getDocs, deleteDoc, doc, addDoc, updateDoc, arrayUnion, arrayRemove  } from '../../network/firebase';
 
 const Clientes = () =>{
-  const [clientes, setClientes] = useState([]);
 
+  
+  const [clientes, setClientes] = useState([]);
+  const [id, setId] = useState([]);
   const [open, setOpen] = useState(false);
   const clientesCollectionRef = collection(db, "terceros");
   const [get, setGet] = useState([]);
   const [filter, setFilter] = useState([]);
+  const [select, setSelect] = useState([]);
+  const [tipoForm, setTipoForm] = useState("");
+  
+  
+  
+
 
   const eliminarClientes = (clientes) => {
     clientes.map(async id =>{
@@ -19,16 +27,18 @@ const Clientes = () =>{
     })
   }
 
-  const actualizaCliente = async (id) => {
-    const cliente = doc(db, "terceros", id);
 
-    await updateDoc(cliente,{email: arrayRemove("luisa@dsklfmds.com")});
-    // await updateDoc(cliente,{email: arrayUnion("prueba@prueba")});
+
+
+
+  const actualizaCliente = async(data) => {
+
+    
+    const clienteUp = doc(db, "terceros", `${id}`);
+     await updateDoc(clienteUp, {...data} );
+    setOpen(false);
     obtenerClientes();
-    console.log(clientes);
-    }
-     
-
+  }
   
 
   const guardarClientes = async (data) => {
@@ -43,10 +53,12 @@ const Clientes = () =>{
   const obtenerClientes = async () => {
     const datac = await getDocs(clientesCollectionRef);
     setGet(datac.docs.map(doc => ({ ...doc.data(),  id: doc.id})));
+    
   }
 
   useEffect(()=>{
     obtenerClientes();
+    
   }, []);
 
   useEffect(()=>{
@@ -55,19 +67,29 @@ const Clientes = () =>{
   
   useEffect(()=>{
     setClientes(filter);
-    console.log("Clientes*",clientes);
   },[filter]);
 
 
+const filtroId = clientes.filter(docs => docs.id == id);
 
+
+  useEffect(()=>{
+    setSelect((filtroId[0]));
+    setTipoForm("edit");
+  },[id]);
+
+
+  useEffect(()=>{
+    console.log("Tipo de form",tipoForm);
+  },[tipoForm]);
 
 
 
 
   return (
     <div>
-      <Table clientes={clientes} handleDelete={eliminarClientes} setOpen={setOpen} actualizaCliente={actualizaCliente} />
-      <Modal open={open} setOpen={setOpen} tipoFormulario="clientes" handleSubmit={guardarClientes} />
+      <Table clientes={clientes} handleDelete={eliminarClientes} setOpen={setOpen} setId={setId} setTipoForm={setTipoForm}  />
+      <Modal open={open} setOpen={setOpen} tipoFormulario={tipoForm} handleSubmit={guardarClientes} handleSubmit2={actualizaCliente} select={select} setTipoForm={setTipoForm} setId={setId} />
     </div>
     
   )

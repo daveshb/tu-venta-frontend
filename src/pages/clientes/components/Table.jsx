@@ -24,7 +24,8 @@ import {headCells} from '../constants';
 import Add from '@mui/icons-material/AddCircle';
 import AddCircle from '@mui/icons-material/AddCircle';
 import Pencil from '@mui/icons-material/Edit';
-import PencilOff from '@mui/icons-material/EditOff';
+import { SettingsSystemDaydreamTwoTone } from '@material-ui/icons';
+
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -111,9 +112,12 @@ EnhancedTableHead.propTypes = {
   rowCount: PropTypes.number.isRequired,
 };
 
-const EnhancedTableToolbar = (props) => {
-  const { numSelected, handleDelete, selected, setSelected, setOpen, actualizaCliente } = props;
+export const EnhancedTableToolbar = (props) => {
+  const { numSelected, handleDelete, selected, setSelected , setOpen  } = props;
 
+  
+
+ 
   return (
     <Toolbar
       sx={{
@@ -147,31 +151,6 @@ const EnhancedTableToolbar = (props) => {
         </Typography>
       )}
 
-      {numSelected == 1 ? (
-        <Tooltip title="Edit">
-          <IconButton>
-            <Pencil onClick={()=>{
-             
-            //  setSelected([]);
-            actualizaCliente(selected);
-              
-              
-              }} />
-          </IconButton>
-        </Tooltip>
-      ) : (
-        <Tooltip title="Selecciona un Cliente">
-          <IconButton>
-            <PencilOff>
-            </PencilOff>
-          </IconButton>
-        </Tooltip>
-      )}  
-
-
-
-
-
       {numSelected > 0 ? (
         <Tooltip title="Delete">
           <IconButton>
@@ -184,7 +163,12 @@ const EnhancedTableToolbar = (props) => {
       ) : (
         <Tooltip title="Adicionar Cliente">
           <IconButton>
-            <AddCircle onClick={()=>setOpen(true)} />
+            <AddCircle 
+            onClick={()=> {
+               setOpen(true);
+            }}
+            
+            />
           </IconButton>
         </Tooltip>
       )}
@@ -196,7 +180,7 @@ EnhancedTableToolbar.propTypes = {
   numSelected: PropTypes.number.isRequired,
 };
 
-export default function EnhancedTable({clientes, handleDelete, setOpen}) {
+export default function EnhancedTable({clientes, handleDelete, setOpen ,setId, setTipoForm }) {
   const [order, setOrder] = React.useState('asc');
   const [orderBy, setOrderBy] = React.useState('nombre');
   const [selected, setSelected] = React.useState([]);
@@ -209,6 +193,8 @@ export default function EnhancedTable({clientes, handleDelete, setOpen}) {
     setOrder(isAsc ? 'desc' : 'asc');
     setOrderBy(property);
   };
+
+  
 
   const handleSelectAllClick = (event) => {
     if (event.target.checked) {
@@ -239,6 +225,15 @@ export default function EnhancedTable({clientes, handleDelete, setOpen}) {
     setSelected(newSelected);
   };
 
+
+
+  const handleClickUpdate = (e , idUpdate) => {
+  
+    setId(idUpdate);
+    setOpen(true);
+        
+  }
+
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
@@ -252,11 +247,18 @@ export default function EnhancedTable({clientes, handleDelete, setOpen}) {
     setDense(event.target.checked);
   };
 
+
+
+
+
   const isSelected = (name) => selected.indexOf(name) !== -1;
 
   // Avoid a layout jump when reaching the last page with empty rows.
   const emptyRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - clientes.length) : 0;
+
+
+
 
   return (
     <Box sx={{ width: '100%' }}>
@@ -290,6 +292,8 @@ export default function EnhancedTable({clientes, handleDelete, setOpen}) {
                 .map((row, index) => {
                   const isItemSelected = isSelected(row.id);
                   const labelId = `enhanced-table-checkbox-${index}`;
+
+                 
 
                   return (
                     <TableRow
@@ -325,10 +329,25 @@ export default function EnhancedTable({clientes, handleDelete, setOpen}) {
                       <TableCell align="left">{row.fullName}</TableCell>
                       
                       <TableCell align="left">{row.phone}</TableCell>
-                      {/* <TableCell align="left">{row.type}</TableCell> */}
-                      {/* <TableCell padding="checkbox">
-                        <Add style={{cursor: 'pointer'}} />
-                      </TableCell> */}
+                      {/* <TableCell align="left">{row.id}</TableCell> */}
+
+                      
+                      <TableCell padding="checkbox"> 
+
+                         <Pencil
+                         hover
+                         onClick={(e)=> {handleClickUpdate(e , row.id)}}
+                         aria-checked={isItemSelected}
+                         style={{cursor: 'pointer'}}
+                         key={row.id}
+                         selected={isItemSelected}
+                         >
+                        
+                        </Pencil>
+                        
+                        
+
+                      </TableCell>
                     </TableRow>
                   );
                 })}
