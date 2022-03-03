@@ -2,6 +2,7 @@ import * as React from 'react';
 import { styled, Box } from '@mui/system';
 import ModalUnstyled from '@mui/base/ModalUnstyled';
 import FormularioProductos from '../pages/productos/components/Formulario';
+import FormularioProveedores from '../pages/proveedores/components/Formulario';
 
 const StyledModal = styled(ModalUnstyled)`
   position: fixed;
@@ -34,13 +35,19 @@ const style = {
   pb: 3,
 };
 
-export default function ModalUnstyledDemo({open, setOpen, tipoFormulario, handleSubmit}) {
+export default function ModalUnstyledDemo({open, setOpen, tipoFormulario, handleSubmit, proveedor}) {
   const mostrarFormulario = () => {
     switch(tipoFormulario){
       case "productos":
         return <FormularioProductos handleSubmit={handleSubmit} />
-      default:
+        break;
+      case "proveedores":
+        return <FormularioProveedores proveedor={proveedor} handleSubmit={handleSubmit} />
+        break;
+      
+        default:
       break;
+        
     }
   }
   return (
