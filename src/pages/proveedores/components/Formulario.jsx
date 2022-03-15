@@ -3,6 +3,8 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 
+
+
 export default function Formulario({handleSubmit, proveedor}) {
   const [data, setData] = React.useState({
     documentNumber: proveedor != null ? proveedor.documentNumber : "",
@@ -12,11 +14,11 @@ export default function Formulario({handleSubmit, proveedor}) {
     phone: proveedor != null ? proveedor.phone : "",
     buttonName : proveedor != null ? "Guardar" : "Agregar",
     isUpdate : proveedor != null ? true : false,
-    ...proveedor,
+    ...proveedor
   })
   return (
     <Box
-      component="form"
+      component="form"          
       sx={{
         '& > :not(style)': { m: 1, width: '25ch' },
       }}

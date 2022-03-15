@@ -297,10 +297,11 @@ export default function EnhancedTable({proveedores, handleDelete, setOpen, handl
                       <TableCell align="center">{row.fullName}</TableCell>
                       <TableCell align="center">{row.phone}</TableCell>
                       <TableCell padding="checkbox">
-                        <EditIcon style={{cursor: 'pointer'}} onClick={()=>{
+                        <EditIcon align = "text-center"style={{cursor: 'pointer'}} onClick={()=>{
                           handleEditar(row)
                           setOpen(true)
                         }} />
+                        
 
                       </TableCell>
                     </TableRow>

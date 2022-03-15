@@ -4,6 +4,7 @@ import Table from './components/Table';
 import { collection, db, getDocs, deleteDoc, doc, addDoc,updateDoc} from '../../network/firebase';
 
 
+
 const Proveedores = () => {
     const [proveedores, setProveedores] = useState([]);
     const [open, setOpen] = useState(false);
@@ -22,19 +23,26 @@ const Proveedores = () => {
   
     const guardarProveedor = async (data) => {
         if(data.isUpdate){
-          const proveedorDoc = doc(db, "terceros", data.id);
-    await updateDoc(proveedorDoc,data);
-
+          const proveedorDoc = doc(db, "terceros", `${data.id}`);
+           await updateDoc(proveedorDoc,{...data});
+           console.log(data.isUpdate)
+          
+  
         } else {
           await addDoc(proveedoresCollectionRef, {...data, type:"2"});
+          console.log(data.isUpdate)
+         
         }
-       
+  
         setOpen(false);
         obtenerProveedores();
       }
-    
-    const editarProveedor = (proveedor) => {
-      setProveedor(proveedor)
+      
+
+      const editarProveedor = (proveedor) => {
+        setProveedor(proveedor)
+        console.log(proveedor)
+
     }
 
     const obtenerProveedores = async () => {
