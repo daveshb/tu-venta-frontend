@@ -9,27 +9,16 @@ export default function Formulario({
   handleSubmit2,
   form,
 }) {
-  const objectEmpty = {
-    documentNumber: " ",
-    documentType: " ",
-    email: " ",
-    fullName: " ",
-    id: " ",
-    phone: " ",
-  };
 
-  const objectEdit = {
-    documentNumber: select.documentNumber,
-    documentType: select.documentType,
-    email: select.email,
-    fullName: select.fullName,
-    id: select.id,
-    phone: select.phone,
-  };
-
-  const object = () => (form ? objectEmpty : objectEdit);
-
-  const [data, setData] = React.useState(object);
+    const objectFull ={
+    documentNumber: form ? " " : select.documentNumber,
+    documentType: form ? " " :select.documentType,
+    email: form ? " " : select.email,
+    fullName: form ? " " :select.fullName,
+    id: form ? " " :select.id,
+    phone: form ? " " :select.phone,
+    }
+  const [data, setData] = React.useState(objectFull);
 
   return (
     <Box

@@ -148,21 +148,20 @@ export const EnhancedTableToolbar = (props) => {
 
       {numSelected > 0 ? (
         <Tooltip title="Delete">
-          <IconButton>
-            <DeleteIcon onClick={()=>{
+          <IconButton onClick={()=>{
               setSelected([]);
               handleDelete(selected);
-              }} />
+              }}>
+            <DeleteIcon/>
           </IconButton>
         </Tooltip>
       ) : (
         <Tooltip title="Adicionar Cliente">
-          <IconButton>
-            <AddCircle 
-            onClick={()=> {
-              setOpen(true)
-              }}
-            />
+          <IconButton
+          onClick={()=> {
+            setOpen(true)
+            }}>
+            <AddCircle/>
           </IconButton>
         </Tooltip>
       )}
@@ -299,7 +298,6 @@ export default function EnhancedTable({clientes, handleDelete, setOpen ,setId, s
                       <TableCell align="left">{row.phone}</TableCell>
                       <TableCell padding="checkbox"> 
                          <Pencil
-                         hover
                          onClick={(e)=> {handleClickUpdate(e , row.id)}}
                          aria-checked={isItemSelected}
                          style={{cursor: 'pointer'}}

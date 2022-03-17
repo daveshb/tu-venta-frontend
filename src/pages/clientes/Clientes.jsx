@@ -36,6 +36,7 @@ const Clientes = () => {
     setOpen(false);
     setForm(true);
     obtenerClientes();
+    setId([]);
   };
 
   const guardarClientes = async (data) => {
