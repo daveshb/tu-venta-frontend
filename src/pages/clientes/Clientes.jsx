@@ -13,7 +13,11 @@ const Clientes = () =>{
   const [filter, setFilter] = useState([]);
   const [select, setSelect] = useState([]);
   const [tipoForm, setTipoForm] = useState("clientes");
+  const [form, setForm] = useState(true);
   
+  console.log(form);
+  
+
   const eliminarClientes = (clientes) => {
     clientes.map(async id =>{
       const clienteDoc = doc(db, "terceros", id);
@@ -57,14 +61,14 @@ const filtroId = clientes.filter(docs => docs.id == id);
 
   useEffect(()=>{
     setSelect((filtroId[0]));
-    setTipoForm("edit");
+    
   },[id]);
 
 
   return (
     <div>
-      <Table clientes={clientes} handleDelete={eliminarClientes} setOpen={setOpen} setId={setId} setTipoForm={setTipoForm}  />
-      <Modal open={open} setOpen={setOpen} tipoFormulario={tipoForm} handleSubmit={guardarClientes} handleSubmit2={actualizaCliente} select={select} setTipoForm={setTipoForm} setId={setId} />
+      <Table clientes={clientes} handleDelete={eliminarClientes} setOpen={setOpen} setId={setId} setTipoForm={setTipoForm} setForm={setForm}  />
+      <Modal open={open} setOpen={setOpen} tipoFormulario={tipoForm} handleSubmit={guardarClientes} handleSubmit2={actualizaCliente} select={select} setTipoForm={setTipoForm} setId={setId} form={form} setForm={setForm}/>
     </div>
     
   )

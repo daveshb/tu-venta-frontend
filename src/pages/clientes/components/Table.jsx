@@ -112,7 +112,7 @@ EnhancedTableHead.propTypes = {
 };
 
 export const EnhancedTableToolbar = (props) => {
-  const { numSelected, handleDelete, selected, setSelected , setOpen, setTipoForm  } = props;
+  const { numSelected, handleDelete, selected, setSelected , setOpen, setTipoForm, setForm  } = props;
 
   return (
     <Toolbar
@@ -160,7 +160,7 @@ export const EnhancedTableToolbar = (props) => {
           <IconButton>
             <AddCircle 
             onClick={()=> {
-              setOpen(true);
+              setOpen(true)
               }}
             />
           </IconButton>
@@ -174,7 +174,7 @@ EnhancedTableToolbar.propTypes = {
   numSelected: PropTypes.number.isRequired,
 };
 
-export default function EnhancedTable({clientes, handleDelete, setOpen ,setId, setTipoForm }) {
+export default function EnhancedTable({clientes, handleDelete, setOpen ,setId, setTipoForm, setForm}) {
   const [order, setOrder] = React.useState('asc');
   const [orderBy, setOrderBy] = React.useState('nombre');
   const [selected, setSelected] = React.useState([]);
@@ -219,7 +219,8 @@ export default function EnhancedTable({clientes, handleDelete, setOpen ,setId, s
 
   const handleClickUpdate = (e , idUpdate) => {
     setId(idUpdate);
-    setTipoForm("edit");
+    setForm(false);
+    setTipoForm("clientes");
     setOpen(true);
   }
 

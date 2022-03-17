@@ -3,7 +3,6 @@ import { styled, Box } from '@mui/system';
 import ModalUnstyled from '@mui/base/ModalUnstyled';
 import FormularioProductos from '../pages/productos/components/Formulario';
 import FormularioClientes from '../pages/clientes/components/Formulario';
-import FormularioEdit from '../pages/clientes/components/FormularioEdit';
 
 const StyledModal = styled(ModalUnstyled)`
   position: fixed;
@@ -36,7 +35,7 @@ const style = {
   pb: 3,
 };
 
-export default function ModalUnstyledDemo({open, setOpen, tipoFormulario, handleSubmit, select, handleSubmit2 ,setTipoForm, setId }) {
+export default function ModalUnstyledDemo({open, setOpen, tipoFormulario, handleSubmit, select, handleSubmit2 ,setTipoForm, setId, form, setForm }) {
     const mostrarFormulario = () => {
     switch(tipoFormulario){
       case "productos":
@@ -44,17 +43,12 @@ export default function ModalUnstyledDemo({open, setOpen, tipoFormulario, handle
       break;
 
       case "clientes":
-        return <FormularioClientes handleSubmit={handleSubmit}/>
-      break;
-
-
-      case "edit":
-        return <FormularioEdit handleSubmit2={handleSubmit2}
+        return <FormularioClientes handleSubmit={handleSubmit}
         select={select}
-       />
+        form={form}
+        handleSubmit2={handleSubmit2}/>
       break;
-      default:
-        
+
     }
   }
   return (
@@ -65,6 +59,7 @@ export default function ModalUnstyledDemo({open, setOpen, tipoFormulario, handle
         open={open}
         onClose={()=>{
           setOpen(false);
+          setForm(true);
           setTipoForm("clientes");
         }}
         BackdropComponent={Backdrop}
