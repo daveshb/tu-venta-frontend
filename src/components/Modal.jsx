@@ -1,8 +1,8 @@
-import * as React from 'react';
-import { styled, Box } from '@mui/system';
-import ModalUnstyled from '@mui/base/ModalUnstyled';
-import FormularioProductos from '../pages/productos/components/Formulario';
-import FormularioClientes from '../pages/clientes/components/Formulario';
+import * as React from "react";
+import { styled, Box } from "@mui/system";
+import ModalUnstyled from "@mui/base/ModalUnstyled";
+import FormularioProductos from "../pages/productos/components/Formulario";
+import FormularioClientes from "../pages/clientes/components/Formulario";
 
 const StyledModal = styled(ModalUnstyled)`
   position: fixed;
@@ -16,7 +16,7 @@ const StyledModal = styled(ModalUnstyled)`
   justify-content: center;
 `;
 
-const Backdrop = styled('div')`
+const Backdrop = styled("div")`
   z-index: -1;
   position: fixed;
   right: 0;
@@ -29,46 +29,55 @@ const Backdrop = styled('div')`
 
 const style = {
   width: 800,
-  bgcolor: 'background.paper',
+  bgcolor: "background.paper",
   p: 2,
   px: 4,
   pb: 3,
 };
 
-export default function ModalUnstyledDemo({open, setOpen, tipoFormulario, handleSubmit, select, handleSubmit2 ,setTipoForm, setId, form, setForm }) {
-    const mostrarFormulario = () => {
-    switch(tipoFormulario){
+export default function ModalUnstyledDemo({
+  open,
+  setOpen,
+  tipoFormulario,
+  handleSubmit,
+  select,
+  handleSubmit2,
+  setTipoForm,
+  form,
+  setForm,
+}) {
+  const mostrarFormulario = () => {
+    switch (tipoFormulario) {
       case "productos":
-        return <FormularioProductos handleSubmit={handleSubmit} />
-      break;
+        return <FormularioProductos handleSubmit={handleSubmit} />;
+        break;
 
       case "clientes":
-        return <FormularioClientes handleSubmit={handleSubmit}
-        select={select}
-        form={form}
-        handleSubmit2={handleSubmit2}/>
-      break;
-
+        return (
+          <FormularioClientes
+            handleSubmit={handleSubmit}
+            select={select}
+            form={form}
+            handleSubmit2={handleSubmit2}
+          />
+        );
+        break;
     }
-  }
+  };
   return (
     <div>
       <StyledModal
         aria-labelledby="unstyled-modal-title"
         aria-describedby="unstyled-modal-description"
         open={open}
-        onClose={()=>{
+        onClose={() => {
           setOpen(false);
           setForm(true);
           setTipoForm("clientes");
         }}
         BackdropComponent={Backdrop}
       >
-        <Box sx={style}>
-          {
-            mostrarFormulario()
-          }
-        </Box>
+        <Box sx={style}>{mostrarFormulario()}</Box>
       </StyledModal>
     </div>
   );
