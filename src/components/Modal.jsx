@@ -45,6 +45,8 @@ export default function ModalUnstyledDemo({
   setTipoForm,
   form,
   setForm,
+  setAge,
+  age
 }) {
   const mostrarFormulario = () => {
     switch (tipoFormulario) {
@@ -59,6 +61,8 @@ export default function ModalUnstyledDemo({
             select={select}
             form={form}
             handleSubmit2={handleSubmit2}
+            setAge={setAge}
+            age={age}
           />
         );
         break;
@@ -74,6 +78,7 @@ export default function ModalUnstyledDemo({
           setOpen(false);
           setForm(true);
           setTipoForm("clientes");
+          setAge("");
         }}
         BackdropComponent={Backdrop}
       >

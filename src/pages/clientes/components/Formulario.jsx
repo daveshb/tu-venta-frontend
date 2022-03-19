@@ -2,23 +2,20 @@ import * as React from "react";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
+import BasicSelect from "./BasicSelect";
 
-export default function Formulario({
-  select,
-  handleSubmit,
-  handleSubmit2,
-  form,
+export default function Formulario({select, handleSubmit, handleSubmit2, form, age, setAge,
 }) {
-
-    const objectFull ={
+  const [data, setData] = React.useState({
     documentNumber: form ? " " : select.documentNumber,
-    documentType: form ? " " :select.documentType,
+    documentType: form ? age : select.documentType,
     email: form ? " " : select.email,
-    fullName: form ? " " :select.fullName,
-    id: form ? " " :select.id,
-    phone: form ? " " :select.phone,
-    }
-  const [data, setData] = React.useState(objectFull);
+    fullName: form ? " " : select.fullName,
+    id: form ? " " : select.id,
+    phone: form ? " " : select.phone,
+  });
+
+  console.log(data.documentType);
 
   return (
     <Box
@@ -43,19 +40,7 @@ export default function Formulario({
         }}
       />
 
-      <TextField
-        name="documentType"
-        value={data.documentType}
-        onChange={(event) =>
-          setData({ ...data, documentType: event.target.value })
-        }
-        id="outlined-basic"
-        label="Tipo de documento"
-        variant="outlined"
-        InputLabelProps={{
-          shrink: true,
-        }}
-      />
+      <BasicSelect age={age} setAge={setAge} data={data} setData={setData} />
 
       <TextField
         name="email"

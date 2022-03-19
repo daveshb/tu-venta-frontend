@@ -21,7 +21,6 @@ import Switch from '@mui/material/Switch';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { visuallyHidden } from '@mui/utils';
 import {headCells} from '../constants';
-import Add from '@mui/icons-material/AddCircle';
 import AddCircle from '@mui/icons-material/AddCircle';
 import Pencil from '@mui/icons-material/Edit';
 
@@ -112,7 +111,7 @@ EnhancedTableHead.propTypes = {
 };
 
 export const EnhancedTableToolbar = (props) => {
-  const { numSelected, handleDelete, selected, setSelected , setOpen, setTipoForm, setForm  } = props;
+  const { numSelected, handleDelete, selected, setSelected , setOpen } = props;
 
   return (
     <Toolbar

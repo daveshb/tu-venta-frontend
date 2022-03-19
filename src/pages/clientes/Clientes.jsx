@@ -21,6 +21,7 @@ const Clientes = () => {
   const [select, setSelect] = useState([]);
   const [tipoForm, setTipoForm] = useState("clientes");
   const [form, setForm] = useState(true);
+  const [age, setAge] = useState('');
 
   const eliminarClientes = (clientes) => {
     clientes.map(async (id) => {
@@ -63,7 +64,7 @@ const Clientes = () => {
     setClientes(filter);
   }, [filter]);
 
-  const filtroId = clientes.filter((docs) => docs.id == id);
+  const filtroId = clientes.filter((docs) => docs.id === id);
 
   useEffect(() => {
     setSelect(filtroId[0]);
@@ -90,6 +91,8 @@ const Clientes = () => {
         setId={setId}
         form={form}
         setForm={setForm}
+        age={age}
+        setAge={setAge}
       />
     </div>
   );
