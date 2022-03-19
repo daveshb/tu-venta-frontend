@@ -1,10 +1,13 @@
 import * as React from 'react';
 import { styled, useTheme } from '@mui/material/styles';
+import { makeStyles } from '@mui/styles';
+
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import CssBaseline from '@mui/material/CssBaseline';
 import List from '@mui/material/List';
 import Divider from '@mui/material/Divider';
+import Avatar from '@mui/material/Avatar';
 import IconButton from '@mui/material/IconButton';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
@@ -13,6 +16,8 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import CurrencyExchangeIcon from '@mui/icons-material/CurrencyExchange';
 import DriveFileRenameOutlineIcon from '@mui/icons-material/DriveFileRenameOutline';
+import PeopleIcon from '@mui/icons-material/People';
+
 import { useNavigate } from "react-router-dom";
 
 const drawerWidth = 240;
@@ -36,6 +41,12 @@ const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
   }),
 );
 
+const useStyles = makeStyles({
+  drawerHeader: {
+    justifyContent: 'space-between'
+  },
+});
+
 const DrawerHeader = styled('div')(({ theme }) => ({
   display: 'flex',
   alignItems: 'center',
@@ -44,9 +55,10 @@ const DrawerHeader = styled('div')(({ theme }) => ({
   justifyContent: 'flex-end',
 }));
 
-const PersistentDrawerLeft = ({open, setOpen}) => {
-  const navigatee = useNavigate();
+const PersistentDrawerLeft = ({open, setOpen, userPhotoUrl}) => {
+  const navigate = useNavigate();
   const theme = useTheme();
+  const classes = useStyles();
 
   return (
     <Box sx={{ display: 'flex' }}>
@@ -64,14 +76,15 @@ const PersistentDrawerLeft = ({open, setOpen}) => {
         anchor="left"
         open={open}
       >
-        <DrawerHeader>
+        <DrawerHeader className={classes.drawerHeader}>
+        <Avatar alt="Remy Sharp" src={userPhotoUrl} /> 
           <IconButton onClick={()=>setOpen(false)}>
-            Menú {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
+            {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
           </IconButton>
         </DrawerHeader>
         <Divider />
         <List>
-          <ListItem button onClick={()=>navigatee("/facturacion")}>
+          <ListItem button onClick={()=>navigate("/facturacion")}>
               <ListItemIcon>
               <CurrencyExchangeIcon/>
               <ListItemText primary="Facturación"/>
@@ -79,7 +92,7 @@ const PersistentDrawerLeft = ({open, setOpen}) => {
           </ListItem>
         </List>
         <List>
-          <ListItem button onClick={()=>navigatee("/reportes")}>
+          <ListItem button onClick={()=>navigate("/reportes")}>
             <ListItemIcon>
             <DriveFileRenameOutlineIcon />
             <ListItemText primary="Reportes"/>
@@ -87,11 +100,27 @@ const PersistentDrawerLeft = ({open, setOpen}) => {
           </ListItem>
         </List>
         <List>
-          <ListItem button onClick={()=>navigatee("/home")}>
+          <ListItem button onClick={()=>navigate("/home")}>
               <ListItemIcon>
               <CurrencyExchangeIcon/>
               <ListItemText primary="Home"/>
               </ListItemIcon>
+          </ListItem>
+        </List>
+        <List>
+          <ListItem button onClick={()=>navigate("/productos")}>
+            <ListItemIcon>
+            <DriveFileRenameOutlineIcon />
+            <ListItemText primary="Productos"/>
+            </ListItemIcon>
+          </ListItem>
+        </List>
+        <List>
+          <ListItem button onClick={()=>navigate("/clientes")}>
+            <ListItemIcon>
+            <PeopleIcon />
+            <ListItemText primary="Clientes"/>
+            </ListItemIcon>
           </ListItem>
         </List>
         <Divider />

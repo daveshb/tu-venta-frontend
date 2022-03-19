@@ -1,0 +1,12 @@
+.doc{
+   display: grid;
+   grid-template-columns: repeat(2, 1fr);
+  grid-gap: 8px;
+  grid-auto-rows: minmax(60px, auto);
+  padding: 10px;
+}
+
+.botonModal{
+    align-items: center;
+    
+}

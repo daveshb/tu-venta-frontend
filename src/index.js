@@ -4,12 +4,23 @@ import './index.css';
 import reportWebVitals from './reportWebVitals';
 import RouterContainer from '../src/routes/routerContainer';
 import { BrowserRouter } from "react-router-dom";
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+
+const theme = createTheme({
+  typography: {
+    fontFamily: [
+      'Roboto',
+    ].join(','),
+  },
+});
 
 ReactDOM.render(
   <React.StrictMode>
+    <ThemeProvider theme={theme}>
     <BrowserRouter>
       <RouterContainer />
-    </BrowserRouter>,
+    </BrowserRouter>
+    </ThemeProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );
