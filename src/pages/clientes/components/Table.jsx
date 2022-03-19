@@ -146,7 +146,7 @@ export const EnhancedTableToolbar = (props) => {
       )}
 
       {numSelected > 0 ? (
-        <Tooltip title="Delete">
+        <Tooltip title="Eliminar Cliente">
           <IconButton onClick={()=>{
               setSelected([]);
               handleDelete(selected);
