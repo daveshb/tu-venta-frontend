@@ -35,14 +35,14 @@ const style = {
   pb: 3,
 };
 
-export default function ModalUnstyledDemo({open, setOpen, tipoFormulario, handleSubmit, proveedor}) {
+export default function ModalUnstyledDemo({open, setOpen, tipoFormulario, handleSubmit, proveedor, setTipoForm, tipoForm}) {
   const mostrarFormulario = () => {
     switch(tipoFormulario){
       case "productos":
         return <FormularioProductos handleSubmit={handleSubmit} />
         break;
       case "proveedores":
-        return <FormularioProveedores proveedor={proveedor} handleSubmit={handleSubmit} />
+        return <FormularioProveedores proveedor={proveedor} handleSubmit={handleSubmit} tipoForm={tipoForm} />
         break;
       
         default:
@@ -56,7 +56,8 @@ export default function ModalUnstyledDemo({open, setOpen, tipoFormulario, handle
         aria-labelledby="unstyled-modal-title"
         aria-describedby="unstyled-modal-description"
         open={open}
-        onClose={()=>setOpen(false)}
+        onClose={()=>{setOpen(false)
+        setTipoForm(false)}}
         BackdropComponent={Backdrop}
       >
         <Box sx={style}>

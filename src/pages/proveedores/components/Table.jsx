@@ -145,7 +145,7 @@ const EnhancedTableToolbar = (props) => {
       )}
 
       {numSelected > 0 ? (
-        <Tooltip title="Delete">
+        <Tooltip title="Eliminar">
           <IconButton>
             <DeleteIcon onClick={()=>{
               setSelected([]);
@@ -154,9 +154,11 @@ const EnhancedTableToolbar = (props) => {
           </IconButton>
         </Tooltip>
       ) : (
-        <Tooltip title="Filter list">
-          <IconButton>
-            <AddCircle onClick={()=>setOpen(true)} />
+        <Tooltip title="Agregar Proveedores">
+          <IconButton
+          onClick={()=>
+          setOpen(true)}>
+            <AddCircle />
           </IconButton>
         </Tooltip>
       )}

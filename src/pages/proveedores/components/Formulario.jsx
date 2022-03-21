@@ -1,21 +1,33 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
 
 
-
-export default function Formulario({handleSubmit, proveedor}) {
+export default function Formulario({handleSubmit, proveedor, tipoForm}) {
+  const [open, setOpen] = React.useState(false);
   const [data, setData] = React.useState({
-    documentNumber: proveedor != null ? proveedor.documentNumber : "",
-    documentType: proveedor != null ? proveedor.documentType : "",
-    email: proveedor != null ? proveedor.email : "",
-    fullName: proveedor != null ? proveedor.fullName : "",
-    phone: proveedor != null ? proveedor.phone : "",
-    buttonName : proveedor != null ? "Guardar" : "Agregar",
-    isUpdate : proveedor != null ? true : false,
-    ...proveedor
+    documentNumber:tipoForm ? proveedor.documentNumber : "",
+    documentType:tipoForm ? proveedor.documentType : "",
+    email:tipoForm ? proveedor.email : "",
+    fullName:tipoForm ? proveedor.fullName : "",
+    phone:tipoForm ? proveedor.phone : "",
+    // buttonName :tipoForm ? "Guardar" : "Agregar",
+    // isUpdate :tipoForm ? true : false,
+    // ...proveedor
   })
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
   return (
     <Box
       component="form"          
@@ -35,9 +47,29 @@ export default function Formulario({handleSubmit, proveedor}) {
       InputLabelProps={{
             shrink: true,
           }} />
-      <TextField name="documentType" value={data.documentType} onChange={(event)=>setData({...data, documentType: event.target.value })}  id="outlined-basic" label="Document Type" variant="outlined" InputLabelProps={{
-            shrink: true,
-        }} />
+
+      <FormControl sx={{ m: 1, minWidth: 120 }}>
+        <InputLabel id="demo-controlled-open-select-label">DocumentType</InputLabel>
+        <Select
+          labelId="demo-controlled-open-select-label"
+          id="demo-controlled-open-select"
+          open={open}
+          InputLabelProps={{
+            shrink: true}}
+          onClose={handleClose}
+          onOpen={handleOpen}
+          value={data.documentType}
+          label="Document Type"
+          onChange={(event)=>setData({...data, documentType: event.target.value })}
+          
+        >
+          <MenuItem value="">
+          </MenuItem>
+          <MenuItem value={"CC"}>CC</MenuItem>
+          <MenuItem value={"NN"}>NN</MenuItem>
+        </Select>
+      </FormControl>
+  
         <TextField name="email" value={data.email} onChange={(event)=>setData({...data, email: event.target.value })} id="outlined-basic" label="Email" variant="outlined" InputLabelProps={{
               shrink: true,
         }} />
@@ -48,7 +80,7 @@ export default function Formulario({handleSubmit, proveedor}) {
               shrink: true,
             
           }} />
-      <Button variant="contained" id="boton" onClick={()=>handleSubmit(data)}>{data.buttonName}</Button>
+      <Button variant="contained" id="boton" onClick={()=>handleSubmit(data)}>{tipoForm ? "Actualizar" : "Agregar"}</Button>
     </Box>
   );
 }
